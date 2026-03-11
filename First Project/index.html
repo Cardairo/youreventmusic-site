@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moysic — Live Music for Life's Most Meaningful Moments</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset ─────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ── Design Tokens ─────────────────────────────────────────────── */
+    :root {
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+      --font-sans: "DM Sans", serif;
+      --font-serif: "DM Serif Display", serif;
+      --color-solid-1: #f3f3f3;
+      --color-solid-2: #b3b3b3;
+      --color-solid-3: #a3a3a3;
+      --color-solid-4: #666666;
+      --color-solid-5: #606060;
+      --color-solid-6: #484848;
+      --color-solid-7: #3a3a3a;
+      --color-solid-8: #2f2f2f;
+      --color-solid-9: #292929;
+      --color-solid-10: #212121;
+      --color-solid-11: #151515;
+      --color-solid-12: #050505;
+      --color-white: rgb(255,255,255);
+      --color-black: rgb(0,0,0);
+      --color-border: #e2e2e2;
+      --color-bg-light: #e8e8e8;
+      --color-bg: #f3f3f3;
+      --color-black-alpha-3: rgba(0,0,0,0.24);
+      --color-black-alpha-4: rgba(0,0,0,0.32);
+      --color-black-alpha-5: rgba(0,0,0,0.40);
+      --color-black-alpha-6: rgba(0,0,0,0.48);
+      --color-black-alpha-7: rgba(0,0,0,0.56);
+      --color-black-alpha-8: rgba(0,0,0,0.64);
+      --color-black-alpha-9: rgba(0,0,0,0.72);
+      --base-radius: 4px;
+      --gold: #c4a35a;
+      --gold-light: #f0e4c4;
+    }
+
+    /* ── Base ───────────────────────────────────────────────────────── */
+    body {
+      font-family: var(--font-sans);
+      font-size: clamp(1.4rem, .21vw + 1.33rem, 1.6rem);
+      line-height: 1.5;
+      letter-spacing: -.02em;
+      font-weight: 400;
+      color: var(--color-black-alpha-7);
+      background: var(--color-bg);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    button, input, textarea, select { font-family: inherit; }
+
+    /* ── Layout ─────────────────────────────────────────────────────── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── Nav ────────────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 56px;
+      background: rgba(243,243,243,0.90);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--color-border);
+      transition: background .3s, border-color .3s;
+    }
+    /* Transparent nav when over video hero */
+    nav.over-video {
+      background: transparent;
+      border-bottom-color: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+    nav.over-video .nav-logo-text,
+    nav.over-video .nav-links a,
+    nav.over-video .btn-ghost { color: rgba(255,255,255,0.85); }
+    nav.over-video .nav-links a:hover,
+    nav.over-video .btn-ghost:hover { background: rgba(255,255,255,0.12); color: #fff; }
+    nav.over-video .btn-primary {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+    nav.over-video .btn-primary:hover { background: rgba(255,255,255,0.22); }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 24px;
+      height: 100%;
+      display: flex; align-items: center;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 8px;
+      flex-shrink: 0;
+    }
+    .nav-logo img { height: 40px; width: 40px; object-fit: contain; }
+    .nav-logo-text {
+      font-size: 1.6rem; font-weight: 600;
+      letter-spacing: -.03em; color: var(--color-solid-12);
+    }
+    .nav-links {
+      display: flex; align-items: center; gap: 2px;
+      margin: 0 auto; list-style: none;
+    }
+    .nav-links a {
+      display: block; padding: 6px 13px;
+      font-size: 1.4rem; font-weight: 400;
+      color: var(--color-black-alpha-7);
+      border-radius: var(--base-radius);
+      transition: background .15s, color .15s;
+    }
+    .nav-links a:hover { background: rgba(0,0,0,0.06); color: var(--color-solid-12); }
+    .nav-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .btn-ghost {
+      background: none; border: none;
+      padding: 7px 14px; font-size: 1.4rem; font-weight: 400;
+      color: var(--color-black-alpha-7); border-radius: var(--base-radius);
+      cursor: pointer; transition: background .15s, color .15s;
+    }
+    .btn-ghost:hover { background: rgba(0,0,0,0.06); color: var(--color-solid-12); }
+    .btn-primary {
+      background: var(--color-solid-12); border: none;
+      padding: 7px 16px; font-size: 1.4rem; font-weight: 500;
+      color: var(--color-white); border-radius: 100px;
+      letter-spacing: -.01em; cursor: pointer;
+      transition: background .15s;
+    }
+    .btn-primary:hover { background: var(--color-solid-10); }
+
+    /* ── Video Hero ─────────────────────────────────────────────────── */
+    .video-hero {
+      position: relative;
+      height: 92vh;
+      min-height: 560px;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+    .video-hero video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    /* Placeholder shown until video is added */
+    .video-hero-placeholder {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #111 0%, #1c1a16 50%, #0e0d0b 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .video-hero-placeholder-inner {
+      text-align: center;
+      opacity: .18;
+    }
+    .video-hero-placeholder-inner svg { width: 64px; height: 64px; }
+    .video-hero-placeholder-inner p {
+      margin-top: 12px; font-size: 1.3rem; letter-spacing: .1em;
+      text-transform: uppercase; color: #fff;
+    }
+    /* Dark gradient overlays */
+    .video-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, transparent 35%, transparent 55%, rgba(0,0,0,0.72) 100%);
+      pointer-events: none;
+    }
+    /* Centered content on video */
+    .video-hero-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 56px 24px 0;
+    }
+    .video-hero-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 14px; margin-bottom: 28px;
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 100px;
+      font-size: 1.2rem; font-weight: 500;
+      color: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
+      letter-spacing: .06em; text-transform: uppercase;
+    }
+    .video-hero-tag-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%; background: var(--gold);
+    }
+    .video-hero-location {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 20px;
+      font-size: 1.25rem; font-weight: 500;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+    .video-hero-location span { color: var(--gold); font-size: 1rem; }
+    .video-hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(3.6rem, 5vw + 1rem, 7.6rem);
+      font-weight: 400; letter-spacing: -.03em; line-height: 1.05;
+      color: var(--color-white);
+      max-width: 860px;
+      margin-bottom: 20px;
+    }
+    .video-hero h1 em { font-style: italic; color: rgba(255,255,255,0.55); }
+    .video-hero-sub {
+      font-size: clamp(1.5rem, .5vw + 1.2rem, 1.8rem);
+      color: rgba(255,255,255,0.5);
+      max-width: 500px;
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+    .video-hero-actions {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .btn-video-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 26px;
+      background: var(--gold);
+      color: var(--color-white); border: none;
+      border-radius: 100px;
+      font-size: 1.5rem; font-weight: 600; letter-spacing: -.01em;
+      cursor: pointer; transition: opacity .15s;
+    }
+    .btn-video-primary:hover { opacity: .88; }
+    .btn-video-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 24px;
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.85);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 100px;
+      font-size: 1.5rem; font-weight: 400; letter-spacing: -.01em;
+      cursor: pointer; transition: background .15s;
+      backdrop-filter: blur(8px);
+    }
+    .btn-video-ghost:hover { background: rgba(255,255,255,0.16); }
+    /* Scroll indicator */
+    .video-hero-scroll {
+      position: absolute;
+      bottom: 28px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      color: rgba(255,255,255,0.4); font-size: 1.1rem;
+      letter-spacing: .08em; text-transform: uppercase;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ── Hero (info section below video) ────────────────────────────── */
+    .hero {
+      padding-top: 0;
+      min-height: unset;
+      display: grid;
+      grid-template-rows: 1fr auto;
+    }
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      padding: 96px 0 72px;
+    }
+    .hero-text {}
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 12px; margin-bottom: 24px;
+      border: 1px solid var(--color-border);
+      border-radius: 100px;
+      font-size: 1.2rem; font-weight: 500;
+      color: var(--color-black-alpha-6);
+      background: var(--color-white);
+      letter-spacing: .02em; text-transform: uppercase;
+    }
+    .hero-tag-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%; background: var(--gold);
+    }
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(3.8rem, 4vw + 1rem, 6.4rem);
+      font-weight: 400;
+      letter-spacing: -.03em;
+      line-height: 1.05;
+      color: var(--color-solid-12);
+      margin-bottom: 20px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--color-solid-7);
+    }
+    .hero-sub {
+      font-size: clamp(1.5rem, .4vw + 1.2rem, 1.8rem);
+      color: var(--color-black-alpha-5);
+      line-height: 1.6;
+      margin-bottom: 36px;
+      max-width: 420px;
+    }
+    .hero-actions { display: flex; align-items: center; gap: 10px; }
+    .btn-book {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px;
+      background: var(--color-solid-12);
+      color: var(--color-white); border: none;
+      border-radius: 100px;
+      font-size: 1.5rem; font-weight: 500; letter-spacing: -.01em;
+      cursor: pointer; transition: background .15s;
+    }
+    .btn-book:hover { background: var(--color-solid-10); }
+    .btn-learn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 22px;
+      background: var(--color-white);
+      color: var(--color-solid-10);
+      border: 1px solid var(--color-border);
+      border-radius: 100px;
+      font-size: 1.5rem; font-weight: 400; letter-spacing: -.01em;
+      cursor: pointer; transition: background .15s;
+    }
+    .btn-learn:hover { background: var(--color-bg-light); }
+    .hero-visual { position: relative; }
+    .hero-img-main {
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04), 0 8px 32px rgba(0,0,0,0.08);
+    }
+    .hero-img-main img { width: 100%; height: auto; display: block; }
+    .hero-badge-card {
+      position: absolute;
+      bottom: -16px; left: -24px;
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .badge-icon {
+      width: 40px; height: 40px;
+      background: var(--gold-light);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; flex-shrink: 0;
+    }
+    .badge-text-top { font-size: 1.5rem; font-weight: 600; color: var(--color-solid-12); letter-spacing: -.02em; }
+    .badge-text-bot { font-size: 1.2rem; color: var(--color-black-alpha-4); }
+
+    .hero-stats {
+      border-top: 1px solid var(--color-border);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .hero-stat {
+      padding: 28px 0;
+      border-right: 1px solid var(--color-border);
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat-num {
+      font-family: var(--font-serif);
+      font-size: 3.2rem; font-weight: 400;
+      letter-spacing: -.04em; color: var(--color-solid-12);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .hero-stat-label { font-size: 1.3rem; color: var(--color-black-alpha-4); }
+
+    /* ── Section shared ─────────────────────────────────────────────── */
+    .section-divider { border-top: 1px solid var(--color-border); }
+    .section-pad { padding: 88px 0; }
+    .section-label {
+      font-size: 1.2rem; font-weight: 500;
+      letter-spacing: .06em; text-transform: uppercase;
+      color: var(--color-black-alpha-4);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.8rem, 2.5vw + .8rem, 4.4rem);
+      font-weight: 400; letter-spacing: -.03em; line-height: 1.05;
+      color: var(--color-solid-12);
+    }
+    .section-title em { font-style: italic; color: var(--color-solid-7); }
+
+    /* ── Services ───────────────────────────────────────────────────── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 48px;
+    }
+    .service-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .service-card:hover {
+      box-shadow: 0 8px 40px rgba(0,0,0,0.10);
+      transform: translateY(-2px);
+    }
+    .service-card-img { position: relative; }
+    .service-card-img img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+    .service-card-type {
+      position: absolute; top: 14px; left: 14px;
+      padding: 4px 10px;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(255,255,255,0.6);
+      border-radius: 100px;
+      font-size: 1.2rem; font-weight: 500;
+      color: var(--color-solid-11); letter-spacing: .02em; text-transform: uppercase;
+      backdrop-filter: blur(8px);
+    }
+    .service-card-body { padding: 28px 28px 32px; }
+    .service-card-title {
+      font-family: var(--font-serif);
+      font-size: 2.4rem; font-weight: 400;
+      letter-spacing: -.03em; color: var(--color-solid-12);
+      margin-bottom: 10px; line-height: 1.1;
+    }
+    .service-card-desc {
+      font-size: 1.4rem; color: var(--color-black-alpha-5);
+      line-height: 1.6; margin-bottom: 20px;
+    }
+    .service-tags {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      margin-bottom: 24px;
+    }
+    .service-tag {
+      padding: 4px 10px;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 100px;
+      font-size: 1.2rem; color: var(--color-black-alpha-6);
+    }
+    .service-card-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 1.4rem; font-weight: 500; color: var(--color-solid-12);
+      border-bottom: 1px solid var(--color-border); padding-bottom: 2px;
+      transition: border-color .15s;
+    }
+    .service-card-link:hover { border-color: var(--color-solid-8); }
+
+    /* ── Occasions ───────────────────────────────────────────────────── */
+    .occasions-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 48px;
+    }
+    .occasion-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      padding: 28px 22px;
+      display: flex; flex-direction: column; gap: 12px;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .occasion-card:hover {
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+    .occasion-icon {
+      width: 44px; height: 44px;
+      background: var(--gold-light);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+    }
+    .occasion-title {
+      font-size: 1.6rem; font-weight: 500;
+      letter-spacing: -.02em; color: var(--color-solid-12);
+    }
+    .occasion-desc {
+      font-size: 1.3rem; color: var(--color-black-alpha-5);
+      line-height: 1.55; flex: 1;
+    }
+
+    /* ── About / Artist ─────────────────────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-img-wrap {
+      position: relative;
+    }
+    .about-img-main {
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .about-img-main img { width: 100%; display: block; }
+    .about-img-badge {
+      position: absolute;
+      bottom: -14px; right: -14px;
+      background: var(--gold);
+      border-radius: 10px;
+      padding: 14px 18px;
+      color: var(--color-white);
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(196,163,90,0.35);
+    }
+    .about-img-badge-num {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: 2.8rem; font-weight: 400; letter-spacing: -.04em; line-height: 1;
+    }
+    .about-img-badge-label { font-size: 1.2rem; opacity: .85; }
+    .about-text {}
+    .about-text .section-title { margin-bottom: 20px; }
+    .about-body {
+      font-size: 1.5rem; color: var(--color-black-alpha-5);
+      line-height: 1.7; margin-bottom: 28px;
+    }
+    .about-detail-list {
+      display: flex; flex-direction: column; gap: 10px;
+      margin-bottom: 32px; list-style: none;
+    }
+    .about-detail-list li {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.4rem; color: var(--color-black-alpha-7);
+    }
+    .about-detail-list li::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* ── Gallery ────────────────────────────────────────────────────── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
+      gap: 12px;
+      margin-top: 48px;
+    }
+    .gallery-item {
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .gallery-item.tall { grid-row: span 2; }
+    .gallery-item img { aspect-ratio: 4/3; }
+    .gallery-item.tall img { aspect-ratio: unset; height: 100%; }
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 60%);
+      opacity: 0; transition: opacity .2s;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+    /* ── Testimonials ───────────────────────────────────────────────── */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 48px;
+    }
+    .testimonial-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 28px;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .testimonial-stars { display: flex; gap: 2px; color: var(--gold); font-size: 1.4rem; }
+    .testimonial-event {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 3px 9px;
+      background: var(--gold-light);
+      border-radius: 100px;
+      font-size: 1.1rem; font-weight: 500;
+      color: #8a6f30; letter-spacing: .02em; text-transform: uppercase;
+    }
+    .testimonial-quote {
+      font-family: var(--font-serif);
+      font-size: 1.7rem; font-weight: 400; font-style: italic;
+      color: var(--color-solid-11); line-height: 1.5; flex: 1;
+    }
+    .testimonial-author {
+      display: flex; align-items: center; gap: 10px;
+      border-top: 1px solid var(--color-border); padding-top: 16px;
+    }
+    .testimonial-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%; overflow: hidden;
+      flex-shrink: 0; background: var(--color-bg-light);
+    }
+    .testimonial-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .testimonial-name { font-size: 1.4rem; font-weight: 500; color: var(--color-solid-11); letter-spacing: -.01em; }
+    .testimonial-role { font-size: 1.2rem; color: var(--color-black-alpha-4); }
+
+    /* ── Pricing ────────────────────────────────────────────────────── */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 48px;
+    }
+    .pricing-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: 14px;
+      padding: 32px 28px;
+      display: flex; flex-direction: column; gap: 0;
+      position: relative;
+    }
+    .pricing-card.featured {
+      background: var(--color-solid-12);
+      border-color: var(--color-solid-12);
+    }
+    .pricing-card.featured * { color: rgba(255,255,255,0.8) !important; }
+    .pricing-card.featured .pricing-name,
+    .pricing-card.featured .pricing-price,
+    .pricing-card.featured .pricing-btn { color: #fff !important; }
+    .pricing-popular {
+      position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+      padding: 4px 14px;
+      background: var(--gold);
+      border-radius: 0 0 8px 8px;
+      font-size: 1.1rem; font-weight: 600;
+      color: var(--color-white) !important;
+      letter-spacing: .04em; text-transform: uppercase;
+    }
+    .pricing-name {
+      font-size: 1.3rem; font-weight: 600;
+      letter-spacing: .04em; text-transform: uppercase;
+      color: var(--color-black-alpha-5);
+      margin-bottom: 8px; margin-top: 16px;
+    }
+    .pricing-price {
+      font-family: var(--font-serif);
+      font-size: 4rem; font-weight: 400;
+      letter-spacing: -.05em; color: var(--color-solid-12);
+      line-height: 1; margin-bottom: 4px;
+    }
+    .pricing-price sup { font-size: 2rem; vertical-align: super; }
+    .pricing-per { font-size: 1.3rem; color: var(--color-black-alpha-4); margin-bottom: 24px; }
+    .pricing-divider { border: none; border-top: 1px solid var(--color-border); margin-bottom: 20px; }
+    .pricing-card.featured .pricing-divider { border-color: rgba(255,255,255,0.12); }
+    .pricing-features {
+      list-style: none; display: flex; flex-direction: column; gap: 10px;
+      margin-bottom: 28px; flex: 1;
+    }
+    .pricing-features li {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 1.4rem; color: var(--color-black-alpha-6);
+    }
+    .pricing-features li::before {
+      content: '✓';
+      font-size: 1.2rem; font-weight: 600; color: var(--gold);
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .pricing-card.featured .pricing-features li::before { color: #f0c96a; }
+    .pricing-btn {
+      display: block; width: 100%; text-align: center;
+      padding: 11px 20px;
+      border-radius: 100px;
+      font-size: 1.4rem; font-weight: 500;
+      cursor: pointer; transition: .15s;
+    }
+    .pricing-btn-outline {
+      background: none;
+      border: 1px solid var(--color-border);
+      color: var(--color-solid-12);
+    }
+    .pricing-btn-outline:hover { background: var(--color-bg); }
+    .pricing-btn-filled {
+      background: var(--color-white);
+      border: none;
+      color: var(--color-solid-12);
+    }
+    .pricing-btn-filled:hover { opacity: .88; }
+
+    /* ── Book / CTA ─────────────────────────────────────────────────── */
+    .book-section { padding: 88px 0; }
+    .book-card {
+      background: var(--color-solid-12);
+      border-radius: 20px;
+      padding: 72px 56px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .book-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 0% 50%, rgba(196,163,90,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .book-label {
+      font-size: 1.2rem; font-weight: 500;
+      letter-spacing: .06em; text-transform: uppercase;
+      color: rgba(255,255,255,0.4); margin-bottom: 12px;
+    }
+    .book-title {
+      font-family: var(--font-serif);
+      font-size: clamp(3rem, 3vw + .5rem, 4.8rem);
+      font-weight: 400; letter-spacing: -.03em; line-height: 1.05;
+      color: var(--color-white); margin-bottom: 16px;
+    }
+    .book-title em { font-style: italic; color: rgba(255,255,255,0.65); }
+    .book-sub { font-size: 1.5rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+    .book-form { display: flex; flex-direction: column; gap: 12px; }
+    .book-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-field {
+      display: flex; flex-direction: column; gap: 5px;
+    }
+    .form-field label {
+      font-size: 1.2rem; font-weight: 500;
+      color: rgba(255,255,255,0.5); letter-spacing: .02em;
+    }
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 1.4rem; color: var(--color-white);
+      outline: none;
+      transition: border-color .15s, background .15s;
+      -webkit-appearance: none;
+    }
+    .form-field input::placeholder,
+    .form-field textarea::placeholder { color: rgba(255,255,255,0.28); }
+    .form-field select option { background: #222; color: #fff; }
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+      border-color: rgba(196,163,90,0.6);
+      background: rgba(255,255,255,0.11);
+    }
+    .form-field textarea { resize: none; min-height: 88px; }
+    .btn-submit {
+      width: 100%; padding: 13px 20px;
+      background: var(--gold);
+      border: none; border-radius: 100px;
+      font-size: 1.5rem; font-weight: 600;
+      color: var(--color-white); letter-spacing: -.01em;
+      cursor: pointer; transition: opacity .15s;
+      margin-top: 4px;
+    }
+    .btn-submit:hover { opacity: .88; }
+
+    /* ── Footer ─────────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--color-border);
+      padding: 64px 0 40px;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 220px 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 56px;
+    }
+    .footer-brand-logo {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 12px;
+    }
+    .footer-brand-logo img { height: 36px; width: 36px; object-fit: contain; }
+    .footer-brand-name { font-size: 1.5rem; font-weight: 600; letter-spacing: -.03em; color: var(--color-solid-12); }
+    .footer-tagline { font-size: 1.3rem; color: var(--color-black-alpha-4); line-height: 1.5; margin-bottom: 20px; }
+    .footer-social { display: flex; gap: 8px; }
+    .social-btn {
+      width: 32px; height: 32px;
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      transition: background .15s, border-color .15s;
+    }
+    .social-btn:hover { background: var(--color-bg-light); border-color: var(--color-solid-4); }
+    .footer-col-title { font-size: 1.3rem; font-weight: 600; color: var(--color-solid-12); letter-spacing: -.01em; margin-bottom: 14px; }
+    .footer-links { display: flex; flex-direction: column; gap: 8px; list-style: none; }
+    .footer-links a { font-size: 1.3rem; color: var(--color-black-alpha-5); transition: color .15s; }
+    .footer-links a:hover { color: var(--color-solid-12); }
+    .footer-bottom {
+      border-top: 1px solid var(--color-border);
+      padding-top: 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-copy { font-size: 1.2rem; color: var(--color-black-alpha-4); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: 1.2rem; color: var(--color-black-alpha-4); transition: color .15s; }
+    .footer-legal a:hover { color: var(--color-solid-10); }
+
+    /* ── Mobile ─────────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      html, body { overflow-x: hidden; }
+
+      /* Nav — hide links, keep logo + book button */
+      .nav-links { display: none; }
+      .btn-ghost { display: none; }
+
+      /* Video hero — stack buttons */
+      .video-hero-actions { flex-direction: column; align-items: center; gap: 10px; }
+      .btn-video-primary, .btn-video-ghost { width: 100%; max-width: 280px; justify-content: center; }
+
+      /* Hero info section — single column */
+      .hero-content { grid-template-columns: 1fr; gap: 40px; padding: 56px 0 40px; }
+      .hero-badge-card { left: 0; bottom: -12px; }
+      .hero-visual { padding-bottom: 20px; }
+
+      /* Stats bar */
+      .hero-stats { grid-template-columns: repeat(3, 1fr); }
+      .hero-stat { padding: 20px 0; }
+      .hero-stat-num { font-size: 2.6rem; }
+
+      /* Section padding */
+      .section-pad { padding: 60px 0; }
+
+      /* Services — single column */
+      .services-grid { grid-template-columns: 1fr; }
+
+      /* Occasions — 2 columns */
+      .occasions-grid { grid-template-columns: 1fr 1fr; }
+
+      /* About — single column */
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-img-badge { right: 0; bottom: -10px; }
+      .about-img-wrap { padding-bottom: 20px; }
+
+      /* Gallery — 2 columns */
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item.tall { grid-row: span 1; }
+      .gallery-item.tall img { aspect-ratio: 4/3; height: auto; }
+
+      /* Testimonials — single column */
+      .testimonials-grid { grid-template-columns: 1fr; }
+
+      /* Pricing — single column */
+      .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
+
+      /* Booking card — stack */
+      .book-card { grid-template-columns: 1fr; gap: 36px; padding: 48px 28px; }
+      .book-form-row { grid-template-columns: 1fr; }
+
+      /* Footer */
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      .footer-legal { justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      /* Occasions — single column */
+      .occasions-grid { grid-template-columns: 1fr; }
+
+      /* Gallery — single column */
+      .gallery-grid { grid-template-columns: 1fr; }
+
+      /* Stats — shrink numbers */
+      .hero-stat-num { font-size: 2.2rem; }
+
+      /* Booking card — tighter */
+      .book-card { padding: 36px 20px; }
+
+      /* Footer — single column */
+      .footer-top { grid-template-columns: 1fr; }
+
+      /* Section padding */
+      .section-pad { padding: 48px 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ NAV ══════════════════════════════════════════════════════════ -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <img src="Brand_assets/Logo 2.png" alt="Moysic logo" />
+        <span class="nav-logo-text">Moysic</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#occasions">Occasions</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+      </ul>
+      <div class="nav-actions">
+        <audio id="listen-audio" src="Almost Like Being in Love - Frederick Loewe.mp3" preload="none"></audio>
+        <button class="btn-ghost" id="listen-btn" onclick="(function(){
+          var a=document.getElementById('listen-audio');
+          var b=document.getElementById('listen-btn');
+          if(a.paused){a.play();b.textContent='◼ Stop';}
+          else{a.pause();a.currentTime=0;b.textContent='Listen';}
+        })()">Listen</button>
+        <a href="#book" class="btn-primary">Book now</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ══ VIDEO HERO ═══════════════════════════════════════════════ -->
+    <section class="video-hero">
+
+      <!-- 🎬 Background video — autoplays muted, loops silently -->
+      <video autoplay muted loop playsinline>
+        <source src="hero.mp4" type="video/mp4" />
+      </video>
+
+      <!-- Overlay gradient -->
+      <div class="video-hero-overlay"></div>
+
+      <!-- Content -->
+      <div class="video-hero-content">
+        <p class="video-hero-location">
+          Hudson Valley <span>◆</span> Newburgh <span>◆</span> NYC
+        </p>
+        <h1>Live Piano Music for Weddings, <em>Funerals</em> &amp; Private Events</h1>
+        <p class="video-hero-sub">Solo piano or a full live band — performed with care for the moments that matter most.</p>
+        <div class="video-hero-actions">
+          <a href="#book" class="btn-video-primary">
+            Check availability
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M8.5 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#services" class="btn-video-ghost">See services</a>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="video-hero-scroll">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 7l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </section>
+
+    <!-- ══ HERO ═════════════════════════════════════════════════════ -->
+    <section style="border-top: none;">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1>Live music for life's most <em>meaningful</em> moments.</h1>
+            <p class="hero-sub">Professional piano and live band performances for weddings, memorial services, corporate events, and private celebrations.</p>
+            <div class="hero-actions">
+              <a href="#book" class="btn-book">
+                Book a performance
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M8.5 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <a href="#services" class="btn-learn">View services</a>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="hero-img-main">
+              <img src="https://placehold.co/560x420/e8e4dc/b8a888?text=Live+Performance" alt="Live piano performance" />
+            </div>
+            <div class="hero-badge-card">
+              <div class="badge-icon">🎹</div>
+              <div>
+                <div class="badge-text-top">Piano &amp; Band</div>
+                <div class="badge-text-bot">Solo or full ensemble</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="hero-stats">
+          <div class="hero-stat" style="padding-left: 0;">
+            <div class="hero-stat-num">500+</div>
+            <div class="hero-stat-label">Events performed</div>
+          </div>
+          <div class="hero-stat" style="padding-left: 32px;">
+            <div class="hero-stat-num">12+</div>
+            <div class="hero-stat-label">Years experience</div>
+          </div>
+          <div class="hero-stat" style="padding-left: 32px;">
+            <div class="hero-stat-num">5.0</div>
+            <div class="hero-stat-label">Average rating</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ SERVICES ═════════════════════════════════════════════════ -->
+    <section class="section-divider section-pad" id="services">
+      <div class="container">
+        <p class="section-label">What we offer</p>
+        <h2 class="section-title">Choose your <em>performance</em> style.</h2>
+        <div class="services-grid">
+
+          <!-- Solo Piano -->
+          <div class="service-card">
+            <div class="service-card-img">
+              <img src="https://placehold.co/620x350/ede8e0/a89870?text=Solo+Piano" alt="Solo piano performance" />
+              <span class="service-card-type">Solo</span>
+            </div>
+            <div class="service-card-body">
+              <h3 class="service-card-title">Solo Piano</h3>
+              <p class="service-card-desc">An intimate, elegant experience with live piano. Perfect for ceremonies, quiet receptions, and meaningful remembrances. Repertoire spans classical, contemporary, gospel, and original compositions.</p>
+              <div class="service-tags">
+                <span class="service-tag">Weddings</span>
+                <span class="service-tag">Funeral homes</span>
+                <span class="service-tag">Memorial services</span>
+                <span class="service-tag">Corporate</span>
+                <span class="service-tag">Private events</span>
+              </div>
+              <a href="#book" class="service-card-link">
+                Book solo piano
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Live Band -->
+          <div class="service-card">
+            <div class="service-card-img">
+              <img src="https://placehold.co/620x350/e0e4ed/8090b0?text=Live+Band" alt="Live band performance" />
+              <span class="service-card-type">Ensemble</span>
+            </div>
+            <div class="service-card-body">
+              <h3 class="service-card-title">Live Band</h3>
+              <p class="service-card-desc">A full 3–4 piece ensemble bringing energy and warmth to any event. From soulful background sets to full dance-floor performances, the band adapts to your vibe and venue perfectly.</p>
+              <div class="service-tags">
+                <span class="service-tag">Wedding receptions</span>
+                <span class="service-tag">Birthday parties</span>
+                <span class="service-tag">Galas</span>
+                <span class="service-tag">Corporate events</span>
+                <span class="service-tag">Festivals</span>
+              </div>
+              <a href="#book" class="service-card-link">
+                Book the band
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ OCCASIONS ════════════════════════════════════════════════ -->
+    <section class="section-divider section-pad" id="occasions">
+      <div class="container">
+        <p class="section-label">Perfect for</p>
+        <h2 class="section-title">Every occasion deserves <em>great music.</em></h2>
+        <div class="occasions-grid">
+          <div class="occasion-card">
+            <div class="occasion-icon">💐</div>
+            <div class="occasion-title">Weddings</div>
+            <p class="occasion-desc">From the processional to the first dance, live music transforms your ceremony and reception into something unforgettable.</p>
+          </div>
+          <div class="occasion-card">
+            <div class="occasion-icon">🕊️</div>
+            <div class="occasion-title">Memorial Services</div>
+            <p class="occasion-desc">Gentle, respectful music that honors a life well-lived. We work with funeral homes and families to create the right atmosphere.</p>
+          </div>
+          <div class="occasion-card">
+            <div class="occasion-icon">🏢</div>
+            <div class="occasion-title">Corporate Events</div>
+            <p class="occasion-desc">Elevate galas, award dinners, product launches, and holiday parties with sophisticated live entertainment.</p>
+          </div>
+          <div class="occasion-card">
+            <div class="occasion-icon">🎉</div>
+            <div class="occasion-title">Private Parties</div>
+            <p class="occasion-desc">Birthdays, anniversaries, and intimate gatherings — we bring the sound that sets the tone for a night guests will talk about.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ ABOUT ═════════════════════════════════════════════════════ -->
+    <section class="section-divider section-pad" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-img-wrap">
+            <div class="about-img-main">
+              <img src="https://placehold.co/520x580/e4ddd4/9a8a7a?text=Artist+Photo" alt="Artist photo" />
+            </div>
+            <div class="about-img-badge">
+              <span class="about-img-badge-num">12+</span>
+              <span class="about-img-badge-label">Years performing</span>
+            </div>
+          </div>
+          <div class="about-text">
+            <p class="section-label">About the artist</p>
+            <h2 class="section-title">Music that moves <em>people.</em></h2>
+            <p class="about-body">Based out of Moysic Music & Creative Studio, I've spent over a decade performing at events that matter — weddings, memorials, galas, and everything in between. My approach is rooted in listening: to the room, to the moment, and to what you need.</p>
+            <p class="about-body">Whether it's a quiet piano piece during a candle-lit ceremony or a full band set that gets the whole room dancing, every performance is crafted with intention and care.</p>
+            <ul class="about-detail-list">
+              <li>Classically trained, versatile across genres</li>
+              <li>Experienced with sound systems and acoustic spaces</li>
+              <li>Collaborative — happy to learn your special song</li>
+              <li>Reliable, professional, and easy to work with</li>
+            </ul>
+            <a href="#book" class="btn-book" style="display:inline-flex;">
+              Let's work together
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M8.5 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ GALLERY ═══════════════════════════════════════════════════ -->
+    <section class="section-divider section-pad" id="gallery">
+      <div class="container">
+        <p class="section-label">Gallery</p>
+        <h2 class="section-title">Scenes from past <em>performances.</em></h2>
+        <div class="gallery-grid">
+          <div class="gallery-item tall">
+            <img src="https://placehold.co/340x520/e0d8cc/9a9080?text=Wedding+Ceremony" alt="Wedding ceremony performance" />
+            <div class="gallery-overlay"></div>
+          </div>
+          <div class="gallery-item">
+            <img src="https://placehold.co/340x260/dce4e8/8898a8?text=Piano+Close-up" alt="Piano close-up" />
+            <div class="gallery-overlay"></div>
+          </div>
+          <div class="gallery-item">
+            <img src="https://placehold.co/340x260/e4e0d8/9a9080?text=Memorial+Service" alt="Memorial service" />
+            <div class="gallery-overlay"></div>
+          </div>
+          <div class="gallery-item">
+            <img src="https://placehold.co/340x260/e8e0dc/a89080?text=Band+Live" alt="Band live performance" />
+            <div class="gallery-overlay"></div>
+          </div>
+          <div class="gallery-item">
+            <img src="https://placehold.co/340x260/dce0e8/8090a0?text=Corporate+Gala" alt="Corporate gala" />
+            <div class="gallery-overlay"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ TESTIMONIALS ══════════════════════════════════════════════ -->
+    <section class="section-divider section-pad">
+      <div class="container">
+        <p class="section-label">Client reviews</p>
+        <h2 class="section-title">What our clients <em>say.</em></h2>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div>
+              <div class="testimonial-stars">★★★★★</div>
+            </div>
+            <span class="testimonial-event">💐 Wedding</span>
+            <p class="testimonial-quote">"The music was the highlight of our wedding. Our guests were moved to tears during the ceremony and dancing all night at the reception. Truly magical."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">
+                <img src="https://placehold.co/36x36/e0d8cc/9a9080?text=SC" alt="Sarah C" />
+              </div>
+              <div>
+                <div class="testimonial-name">Sarah &amp; Chris M.</div>
+                <div class="testimonial-role">Wedding, June 2025</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div>
+              <div class="testimonial-stars">★★★★★</div>
+            </div>
+            <span class="testimonial-event">🕊️ Memorial</span>
+            <p class="testimonial-quote">"We couldn't have asked for more during such a difficult time. The piano music was gentle, heartfelt, and perfectly honoring. Every family we work with asks about the musician."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">
+                <img src="https://placehold.co/36x36/dce4e8/8898a8?text=JR" alt="James R" />
+              </div>
+              <div>
+                <div class="testimonial-name">James R.</div>
+                <div class="testimonial-role">Funeral home director</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div>
+              <div class="testimonial-stars">★★★★★</div>
+            </div>
+            <span class="testimonial-event">🏢 Corporate</span>
+            <p class="testimonial-quote">"We booked the band for our annual gala and they absolutely delivered. Professional, versatile, and they read the room perfectly. Already booked for next year."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">
+                <img src="https://placehold.co/36x36/e4e0d8/9a9080?text=DL" alt="Diana L" />
+              </div>
+              <div>
+                <div class="testimonial-name">Diana L.</div>
+                <div class="testimonial-role">Event director, Luxe Corp</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ PRICING ═══════════════════════════════════════════════════ -->
+    <section class="section-divider section-pad" id="pricing">
+      <div class="container">
+        <p class="section-label">Pricing</p>
+        <h2 class="section-title">Simple, transparent <em>rates.</em></h2>
+        <div class="pricing-grid">
+          <div class="pricing-card">
+            <div class="pricing-name">Solo Piano</div>
+            <div class="pricing-price"><sup>$</sup>350</div>
+            <div class="pricing-per">per 2-hour performance</div>
+            <hr class="pricing-divider" />
+            <ul class="pricing-features">
+              <li>Up to 2 hours of live piano</li>
+              <li>Standard repertoire included</li>
+              <li>1 custom song request</li>
+              <li>Ideal for ceremonies &amp; memorials</li>
+              <li>Sound check included</li>
+            </ul>
+            <button class="pricing-btn pricing-btn-outline" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">Book solo piano</button>
+          </div>
+          <div class="pricing-card featured">
+            <div class="pricing-popular">Most popular</div>
+            <div class="pricing-name">Piano + Vocalist</div>
+            <div class="pricing-price"><sup>$</sup>600</div>
+            <div class="pricing-per">per 3-hour performance</div>
+            <hr class="pricing-divider" />
+            <ul class="pricing-features">
+              <li>Up to 3 hours of live music</li>
+              <li>Piano + lead vocalist duo</li>
+              <li>3 custom song requests</li>
+              <li>Perfect for weddings &amp; receptions</li>
+              <li>PA system provided</li>
+              <li>Set list consultation</li>
+            </ul>
+            <button class="pricing-btn pricing-btn-filled" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">Book this package</button>
+          </div>
+          <div class="pricing-card">
+            <div class="pricing-name">Full Band</div>
+            <div class="pricing-price"><sup>$</sup>1,200</div>
+            <div class="pricing-per">per 4-hour performance</div>
+            <hr class="pricing-divider" />
+            <ul class="pricing-features">
+              <li>3–4 piece live band</li>
+              <li>Up to 4 hours of live music</li>
+              <li>Unlimited song requests</li>
+              <li>Full PA &amp; lighting setup</li>
+              <li>Cocktail hour + reception sets</li>
+              <li>Dedicated event coordinator</li>
+            </ul>
+            <button class="pricing-btn pricing-btn-outline" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">Book the band</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ BOOKING FORM ══════════════════════════════════════════════ -->
+    <section class="book-section" id="book">
+      <div class="container">
+        <div class="book-card">
+          <div>
+            <p class="book-label">Booking inquiry</p>
+            <h2 class="book-title">Let's make your event <em>unforgettable.</em></h2>
+            <p class="book-sub">Fill out the form and we'll get back to you within 24 hours to discuss your event and confirm availability.</p>
+          </div>
+          <form class="book-form" id="booking-form" action="https://formspree.io/f/mreypvnk" method="POST">
+            <div class="book-form-row">
+              <div class="form-field">
+                <label for="f-name">Your name</label>
+                <input id="f-name" type="text" name="name" placeholder="Jane Smith" required />
+              </div>
+              <div class="form-field">
+                <label for="f-email">Email address</label>
+                <input id="f-email" type="email" name="email" placeholder="jane@example.com" required />
+              </div>
+            </div>
+            <div class="book-form-row">
+              <div class="form-field">
+                <label for="f-event">Event type</label>
+                <select id="f-event" name="event_type" required>
+                  <option value="" disabled selected>Select event type</option>
+                  <option>Wedding ceremony</option>
+                  <option>Wedding reception</option>
+                  <option>Memorial / Funeral</option>
+                  <option>Corporate event</option>
+                  <option>Private party</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="f-service">Service</label>
+                <select id="f-service" name="service" required>
+                  <option value="" disabled selected>Select service</option>
+                  <option>Solo Piano</option>
+                  <option>Piano + Vocalist</option>
+                  <option>Full Band (3–4 piece)</option>
+                  <option>Not sure yet</option>
+                </select>
+              </div>
+            </div>
+            <div class="book-form-row">
+              <div class="form-field">
+                <label for="f-date">Event date</label>
+                <input id="f-date" type="date" name="event_date" />
+              </div>
+              <div class="form-field">
+                <label for="f-venue">Location / venue</label>
+                <input id="f-venue" type="text" name="venue" placeholder="City or venue name" />
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="f-details">Additional details</label>
+              <textarea id="f-details" name="details" placeholder="Tell us about your event — song requests, timeline, special requests…"></textarea>
+            </div>
+            <button type="submit" class="btn-submit" id="submit-btn">Send booking inquiry →</button>
+          </form>
+
+          <!-- Success message (hidden until form submits) -->
+          <div id="form-success" style="display:none; text-align:center; padding: 3rem 1rem;">
+            <div style="font-size: 2.5rem; margin-bottom: 1rem;">✓</div>
+            <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--color-solid-12); margin-bottom: 0.5rem;">Inquiry sent!</h3>
+            <p style="color: var(--color-solid-10); line-height: 1.7;">Thanks for reaching out. We'll be in touch within 24 hours to discuss your event.</p>
+          </div>
+
+          <script>
+            (function () {
+              var form = document.getElementById('booking-form');
+              var success = document.getElementById('form-success');
+              var btn = document.getElementById('submit-btn');
+
+              function reset() {
+                btn.disabled = false;
+                btn.textContent = 'Send booking inquiry →';
+              }
+
+              form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Manual required-field check with visible feedback
+                var name = form.querySelector('[name="name"]').value.trim();
+                var email = form.querySelector('[name="email"]').value.trim();
+                var eventType = form.querySelector('[name="event_type"]').value;
+                var service = form.querySelector('[name="service"]').value;
+
+                if (!name || !email || !eventType || !service) {
+                  alert('Please fill in your name, email, event type, and service before submitting.');
+                  return;
+                }
+
+                btn.disabled = true;
+                btn.textContent = 'Sending…';
+
+                fetch(form.action, {
+                  method: 'POST',
+                  body: new FormData(form),
+                  headers: { 'Accept': 'application/json' }
+                })
+                .then(function (res) {
+                  if (res.ok) {
+                    form.style.display = 'none';
+                    success.style.display = 'block';
+                  } else {
+                    return res.json().then(function (data) {
+                      var msg = (data.errors || []).map(function(err){ return err.message; }).join(', ');
+                      alert('Submission error: ' + (msg || 'Unknown error (status ' + res.status + '). Check that your Formspree form is activated.'));
+                      reset();
+                    });
+                  }
+                })
+                .catch(function (err) {
+                  alert('Network error — check your internet connection and try again.\n\n' + err);
+                  reset();
+                });
+              });
+            })();
+          </script>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══ FOOTER ═══════════════════════════════════════════════════ -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand-logo">
+            <img src="Brand_assets/Logo 2.png" alt="Moysic" />
+            <span class="footer-brand-name">Moysic</span>
+          </div>
+          <p class="footer-tagline">Music & Creative Studio. Live performances for life's most meaningful moments.</p>
+          <div class="footer-social">
+            <a href="#" class="social-btn" title="Instagram">𝕀</a>
+            <a href="#" class="social-btn" title="Facebook">𝔽</a>
+            <a href="#" class="social-btn" title="YouTube">▶</a>
+          </div>
+        </div>
+        <div>
+          <p class="footer-col-title">Services</p>
+          <ul class="footer-links">
+            <li><a href="#services">Solo Piano</a></li>
+            <li><a href="#services">Piano + Vocalist</a></li>
+            <li><a href="#services">Live Band</a></li>
+            <li><a href="#occasions">All occasions</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Occasions</p>
+          <ul class="footer-links">
+            <li><a href="#occasions">Weddings</a></li>
+            <li><a href="#occasions">Memorial services</a></li>
+            <li><a href="#occasions">Corporate events</a></li>
+            <li><a href="#occasions">Private parties</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Info</p>
+          <ul class="footer-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#book">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 Moysic Music & Creative Studio. All rights reserved.</span>
+        <div class="footer-legal">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Make nav transparent when overlapping the video hero, opaque after
+    (function () {
+      var nav = document.querySelector('nav');
+      var videoHero = document.querySelector('.video-hero');
+      function updateNav() {
+        var threshold = videoHero ? videoHero.offsetHeight - nav.offsetHeight : 0;
+        if (window.scrollY < threshold) {
+          nav.classList.add('over-video');
+        } else {
+          nav.classList.remove('over-video');
+        }
+      }
+      updateNav();
+      window.addEventListener('scroll', updateNav, { passive: true });
+      window.addEventListener('resize', updateNav, { passive: true });
+    })();
+  </script>
+
+</body>
+</html>
