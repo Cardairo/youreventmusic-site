@@ -914,13 +914,8 @@
         <li><a href="#pricing">Pricing</a></li>
       </ul>
       <div class="nav-actions">
-        <audio id="listen-audio" src="Almost Like Being in Love - Frederick Loewe.mp3" preload="none"></audio>
-        <button class="btn-ghost" id="listen-btn" onclick="(function(){
-          var a=document.getElementById('listen-audio');
-          var b=document.getElementById('listen-btn');
-          if(a.paused){a.play();b.textContent='◼ Stop';}
-          else{a.pause();a.currentTime=0;b.textContent='Listen';}
-        })()">Listen</button>
+        <audio id="listen-audio" src="Almost Like Being in Love - Frederick Loewe.mp3" preload="auto" loop></audio>
+        <button class="btn-ghost" id="listen-btn">Listen</button>
         <a href="#book" class="btn-primary">Book now</a>
       </div>
     </div>
@@ -1467,6 +1462,43 @@
       updateNav();
       window.addEventListener('scroll', updateNav, { passive: true });
       window.addEventListener('resize', updateNav, { passive: true });
+    })();
+
+    // ── Music autoplay ───────────────────────────────────────────────
+    (function () {
+      var audio = document.getElementById('listen-audio');
+      var btn   = document.getElementById('listen-btn');
+
+      function setPlaying(playing) {
+        btn.textContent = playing ? '◼ Stop' : 'Listen';
+      }
+
+      // Try immediate autoplay
+      audio.play().then(function () {
+        setPlaying(true);
+      }).catch(function () {
+        // Browser blocked autoplay — play on first interaction instead
+        function startOnInteraction() {
+          audio.play().then(function () { setPlaying(true); });
+          document.removeEventListener('click',  startOnInteraction);
+          document.removeEventListener('scroll', startOnInteraction);
+          document.removeEventListener('keydown', startOnInteraction);
+        }
+        document.addEventListener('click',  startOnInteraction, { once: true });
+        document.addEventListener('scroll', startOnInteraction, { once: true });
+        document.addEventListener('keydown', startOnInteraction, { once: true });
+      });
+
+      // Manual toggle
+      btn.addEventListener('click', function () {
+        if (audio.paused) {
+          audio.play().then(function () { setPlaying(true); });
+        } else {
+          audio.pause();
+          audio.currentTime = 0;
+          setPlaying(false);
+        }
+      });
     })();
   </script>
 
