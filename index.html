@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0f0e0c" />
-  <title>Moysic — Live Music for Weddings, Funerals & Private Events</title>
+  <title>Moysic Live Event Music — Elegant Live Piano for Weddings & Memorial Services | Hudson Valley, Newburgh, NYC</title>
+  <meta name="description" content="Professional live piano music for weddings, funerals, and private events in Hudson Valley, Newburgh, and NYC. Wedding pianist, funeral pianist, memorial service music. Call (877) 368-7429." />
+  <meta name="keywords" content="wedding pianist hudson valley, funeral pianist near me, pianist for wedding ceremony NY, memorial service pianist, live piano music Newburgh NY, wedding music hudson valley, funeral home pianist, cocktail hour pianist, live event music NYC" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet" />
@@ -97,7 +99,7 @@
     .nav-logo img { height: 36px; width: 36px; object-fit: contain; filter: brightness(1.1); }
     .nav-logo-text {
       font-family: var(--display);
-      font-size: 2rem; font-weight: 500; letter-spacing: .02em; color: var(--cream);
+      font-size: 1.6rem; font-weight: 500; letter-spacing: .02em; color: var(--cream);
     }
     .nav-links {
       display: flex; align-items: center; gap: 0;
@@ -496,6 +498,90 @@
       .section { padding: 48px 0; }
       .book-card { padding: 36px 20px; }
     }
+
+    /* ── WATCH PERFORMANCE BUTTON ── */
+    .btn-hero-video {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 14px 26px;
+      border: 1px solid rgba(196,163,90,0.35); color: var(--gold);
+      border-radius: 2px;
+      font-size: 1.3rem; font-weight: 400; letter-spacing: .06em; text-transform: uppercase;
+      cursor: pointer; transition: border-color .2s, background .2s;
+      touch-action: manipulation; background: rgba(196,163,90,0.06);
+    }
+    .btn-hero-video:hover { border-color: var(--gold); background: rgba(196,163,90,0.12); }
+    .btn-hero-video .play-icon {
+      width: 22px; height: 22px; border-radius: 50%;
+      border: 1px solid rgba(196,163,90,0.6);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+
+    /* ── CONTACT QUICK ── */
+    .contact-quick {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px;
+    }
+    .contact-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 18px; border: 1px solid var(--border2); border-radius: 2px;
+      font-size: 1.25rem; font-weight: 400; letter-spacing: .04em;
+      color: var(--cream-2); transition: border-color .2s, color .2s;
+      touch-action: manipulation;
+    }
+    .contact-btn:hover { border-color: var(--gold); color: var(--cream); }
+    .contact-divider {
+      display: flex; align-items: center; gap: 14px; margin: 20px 0 4px;
+    }
+    .contact-divider-line { flex: 1; height: 1px; background: var(--border2); }
+    .contact-divider-text {
+      font-size: 1.1rem; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--cream-3);
+    }
+
+    /* ── STICKY MOBILE BOOK ── */
+    .sticky-book-mobile {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+      padding: 12px 20px; padding-bottom: calc(12px + env(safe-area-inset-bottom));
+      background: rgba(15,14,12,0.97); border-top: 1px solid var(--border2);
+      backdrop-filter: blur(20px);
+    }
+    .sticky-book-btn {
+      display: block; width: 100%; text-align: center;
+      padding: 15px 20px; background: var(--gold); color: var(--bg);
+      border: none; border-radius: 2px;
+      font-size: 1.4rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+      cursor: pointer; touch-action: manipulation;
+    }
+    @media (max-width: 768px) {
+      .sticky-book-mobile { display: block; }
+      .video-hero-actions { flex-wrap: wrap; }
+      .btn-hero-video { width: 100%; max-width: 260px; justify-content: center; }
+      main { padding-bottom: 68px; }
+      .contact-quick { flex-direction: column; }
+      .contact-btn { justify-content: center; }
+    }
+
+    /* ── SEO LOCATIONS SECTION ── */
+    .seo-locations {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+      margin-top: 48px; background: var(--border);
+    }
+    .seo-loc-card {
+      background: var(--bg); padding: 28px 24px;
+    }
+    .seo-loc-title {
+      font-family: var(--display); font-size: 2rem; font-weight: 400;
+      color: var(--cream); margin-bottom: 10px;
+    }
+    .seo-loc-text { font-size: 1.35rem; color: var(--cream-2); line-height: 1.65; }
+    .seo-keywords {
+      margin-top: 40px; padding: 28px 32px;
+      border: 1px solid var(--border2); border-left: 3px solid var(--gold);
+    }
+    .seo-keywords p { font-size: 1.4rem; color: var(--cream-2); line-height: 1.8; }
+    @media (max-width: 768px) {
+      .seo-locations { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -507,7 +593,7 @@
     <div class="nav-inner">
       <a href="/" class="nav-logo">
         <img src="Brand_assets/Logo 2.png" alt="Moysic logo" />
-        <span class="nav-logo-text">Moysic</span>
+        <span class="nav-logo-text">Moysic Live Event Music</span>
       </a>
       <ul class="nav-links">
         <li><a href="#services">Services</a></li>
@@ -531,10 +617,10 @@
       </video>
       <div class="video-hero-overlay"></div>
       <div class="video-hero-content">
-        <p class="hero-eyebrow">Moysic Music &amp; Creative Studio</p>
-        <h1>Live Piano Music for Weddings, <em>Funerals</em> &amp; Private Events</h1>
+        <p class="hero-eyebrow">Moysic Live Event Music</p>
+        <h1>Elegant Live Piano Music for Weddings &amp; <em>Memorial Services</em></h1>
         <p class="video-hero-location">
-          NY <span>◆</span> Hudson Valley <span>◆</span> NYC
+          Hudson Valley <span>◆</span> Newburgh <span>◆</span> NYC
         </p>
         <div class="video-hero-actions">
           <a href="#book" class="btn-hero-primary">
@@ -542,6 +628,10 @@
             <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7h9M8.5 4l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
           <a href="#book" class="btn-hero-ghost">Request a Quote</a>
+          <button class="btn-hero-video" id="watch-performance-btn">
+            <span class="play-icon" aria-hidden="true">▶</span>
+            Watch Performance
+          </button>
         </div>
       </div>
       <div class="hero-scroll" aria-hidden="true">
@@ -602,7 +692,7 @@
               <a href="#book" class="occasion-link">Book →</a>
             </div>
           </div>
-          <a href="funeral-pianist.html" class="occasion-card">
+          <a href="funeral-pianist-hudson-valley.html" class="occasion-card">
             <div class="occasion-num">02</div>
             <div class="occasion-icon">🕊️</div>
             <div class="occasion-title">Memorial Services</div>
@@ -710,6 +800,32 @@
       </div>
     </section>
 
+    <!-- SEO LOCATIONS -->
+    <section class="section">
+      <div class="container">
+        <p class="s-eyebrow">Serving the Hudson Valley &amp; Beyond</p>
+        <h2 class="s-title">Wedding &amp; Funeral Pianist <em>Near You</em></h2>
+        <p class="s-body">Looking for a professional wedding pianist or funeral pianist in Hudson Valley, NY? We provide elegant live piano music across the region.</p>
+        <div class="seo-locations">
+          <div class="seo-loc-card">
+            <div class="seo-loc-title">Wedding Pianist Hudson Valley</div>
+            <p class="seo-loc-text">Live piano for wedding ceremonies, cocktail hours, and receptions across Newburgh, Beacon, Poughkeepsie, and Middletown, NY.</p>
+          </div>
+          <div class="seo-loc-card">
+            <div class="seo-loc-title">Funeral Pianist Near Me</div>
+            <p class="seo-loc-text">Compassionate, professional piano music for funeral homes, memorial services, and celebration-of-life events throughout the Hudson Valley.</p>
+          </div>
+          <div class="seo-loc-card">
+            <div class="seo-loc-title">Live Event Music NYC</div>
+            <p class="seo-loc-text">Available for corporate galas, private parties, and weddings in New York City and the greater tri-state area.</p>
+          </div>
+        </div>
+        <div class="seo-keywords">
+          <p>We serve <strong style="color:var(--cream)">Newburgh</strong>, <strong style="color:var(--cream)">Middletown</strong>, <strong style="color:var(--cream)">Beacon</strong>, <strong style="color:var(--cream)">Poughkeepsie</strong>, <strong style="color:var(--cream)">Kingston</strong>, <strong style="color:var(--cream)">New Paltz</strong>, and <strong style="color:var(--cream)">New York City</strong> — providing professional pianist services for weddings, funeral homes, memorial services, corporate events, and private parties.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- PRICING -->
     <section class="section" id="pricing">
       <div class="container">
@@ -717,44 +833,46 @@
         <h2 class="s-title">What to <em>expect.</em></h2>
         <p class="pricing-intro">Packages typically range from <strong style="color:var(--cream);">$200–$1,500+</strong> depending on event length, location, and service. Every quote is custom — reach out and we'll find what works.</p>
         <div class="pricing-grid">
-          <div class="p-card">
-            <div class="p-name">Solo Piano</div>
-            <div class="p-price">From $350</div>
-            <div class="p-per">2-hour performance</div>
-            <div class="p-divider"></div>
-            <ul class="p-features">
-              <li>Up to 2 hours of live piano</li>
-              <li>Standard repertoire included</li>
-              <li>Custom song requests welcome</li>
-              <li>Ideal for ceremonies &amp; memorials</li>
-            </ul>
-            <button class="p-btn" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">Request a quote</button>
-          </div>
           <div class="p-card featured">
-            <div class="p-featured-label">Most popular</div>
-            <div class="p-name">Piano + Vocalist</div>
-            <div class="p-price">From $500</div>
-            <div class="p-per">3-hour performance</div>
+            <div class="p-featured-label">Most requested</div>
+            <div class="p-name">Wedding Ceremony Package</div>
+            <div class="p-price">$350</div>
+            <div class="p-per">Solo piano ceremony</div>
             <div class="p-divider"></div>
             <ul class="p-features">
-              <li>Up to 3 hours of live music</li>
-              <li>Piano + lead vocalist duo</li>
+              <li>Prelude music (guests arriving)</li>
+              <li>Processional</li>
+              <li>Signing music</li>
+              <li>Recessional</li>
               <li>Custom song requests welcome</li>
-              <li>Perfect for weddings &amp; receptions</li>
-              <li>PA system provided</li>
             </ul>
             <button class="p-btn" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">Request a quote</button>
           </div>
           <div class="p-card">
-            <div class="p-name">Full Band</div>
-            <div class="p-price">From $900</div>
-            <div class="p-per">4-hour performance</div>
+            <div class="p-name">Funeral Service Package</div>
+            <div class="p-price">$200–$400</div>
+            <div class="p-per">Solo piano service</div>
             <div class="p-divider"></div>
             <ul class="p-features">
-              <li>3–4 piece live band</li>
-              <li>Up to 4 hours of live music</li>
-              <li>Full PA &amp; setup included</li>
+              <li>Prelude music</li>
+              <li>Hymn accompaniment</li>
+              <li>Reflection music</li>
+              <li>Postlude</li>
+              <li>Works with funeral homes directly</li>
+            </ul>
+            <button class="p-btn" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">Request a quote</button>
+          </div>
+          <div class="p-card">
+            <div class="p-name">Reception &amp; Private Events</div>
+            <div class="p-price">From $500</div>
+            <div class="p-per">Piano + vocalist or full band</div>
+            <div class="p-divider"></div>
+            <ul class="p-features">
+              <li>Piano + vocalist duo from $500</li>
+              <li>Full 3–4 piece band from $900</li>
               <li>Cocktail hour + reception sets</li>
+              <li>Full PA &amp; setup included</li>
+              <li>Custom repertoire available</li>
             </ul>
             <button class="p-btn" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">Request a quote</button>
           </div>
@@ -769,7 +887,17 @@
           <div>
             <p class="book-eyebrow">Booking inquiry</p>
             <h2 class="book-title">Let's make your event <em>unforgettable.</em></h2>
-            <p class="book-sub">Fill out the form and we'll get back to you within 24 hours to discuss your event and confirm availability.</p>
+            <p class="book-sub">We'll get back to you within a few minutes.</p>
+            <div class="contact-divider">
+              <div class="contact-divider-line"></div>
+              <span class="contact-divider-text">Or reach us directly</span>
+              <div class="contact-divider-line"></div>
+            </div>
+            <div class="contact-quick">
+              <a href="tel:8773687429" class="contact-btn">📞 Call (877) 368-7429</a>
+              <a href="sms:8773687429" class="contact-btn">💬 Text (877) 368-7429</a>
+              <a href="mailto:Cardairo@gmail.com" class="contact-btn">📧 Cardairo@gmail.com</a>
+            </div>
           </div>
           <form class="book-form" id="booking-form" action="https://formspree.io/f/mreypvnk" method="POST">
             <div class="form-row">
@@ -864,6 +992,11 @@
 
   </main>
 
+  <!-- MOBILE STICKY BOOK -->
+  <div class="sticky-book-mobile" aria-hidden="true">
+    <a href="#book" class="sticky-book-btn">Book Now — Check Availability</a>
+  </div>
+
   <!-- FOOTER -->
   <footer>
     <div class="container">
@@ -871,7 +1004,7 @@
         <div>
           <div class="footer-brand">
             <img src="Brand_assets/Logo 2.png" alt="Moysic" />
-            <span class="footer-brand-name">Moysic</span>
+            <span class="footer-brand-name">Moysic Live Event Music</span>
           </div>
           <p class="footer-tagline">Live music for life's most meaningful moments. Hudson Valley, NY.</p>
           <div class="footer-social">
@@ -892,7 +1025,7 @@
           <p class="footer-col-title">Occasions</p>
           <ul class="footer-links">
             <li><a href="#services">Weddings</a></li>
-            <li><a href="funeral-pianist.html">Funeral &amp; Memorial</a></li>
+            <li><a href="funeral-pianist-hudson-valley.html">Funeral &amp; Memorial</a></li>
             <li><a href="#services">Corporate events</a></li>
             <li><a href="#services">Private parties</a></li>
           </ul>
@@ -907,7 +1040,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span class="footer-copy">© 2026 Moysic Music & Creative Studio. All rights reserved.</span>
+        <span class="footer-copy">© 2026 Moysic Live Event Music. All rights reserved.</span>
       </div>
     </div>
   </footer>
