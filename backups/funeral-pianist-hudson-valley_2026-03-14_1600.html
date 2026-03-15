@@ -218,60 +218,6 @@
       line-height: 1.72; max-width: 620px;
     }
 
-    /* ── SAMPLE PERFORMANCE ── */
-    .sample-section {
-      padding: 60px 0;
-      background: var(--ink);
-      border-bottom: none;
-    }
-    .sample-inner {
-      display: grid;
-      grid-template-columns: 1fr 1.4fr;
-      gap: 48px;
-      align-items: center;
-    }
-    .sample-eyebrow {
-      font-size: 1.15rem; font-weight: 500; letter-spacing: .09em;
-      text-transform: uppercase; color: rgba(184,145,90,.8);
-      margin-bottom: 12px;
-    }
-    .sample-title {
-      font-family: var(--serif);
-      font-size: clamp(3rem, 3vw + 1rem, 5rem);
-      font-weight: 400; letter-spacing: -.02em; line-height: 1.0;
-      color: rgba(255,255,255,.92);
-      margin-bottom: 14px;
-    }
-    .sample-desc {
-      font-size: 1.45rem; color: rgba(255,255,255,.45);
-      line-height: 1.65; max-width: 340px; margin-bottom: 22px;
-    }
-    .sample-tags {
-      display: flex; flex-wrap: wrap; gap: 8px;
-    }
-    .sample-tags span {
-      padding: 5px 13px; border-radius: 100px;
-      border: 1px solid rgba(255,255,255,.12);
-      font-size: 1.25rem; color: rgba(255,255,255,.45);
-    }
-    .sample-video { width: 100%; }
-    .sample-video-wrap {
-      position: relative; padding-bottom: 56.25%; height: 0;
-      overflow: hidden; border-radius: 10px;
-      background: #000;
-      box-shadow: 0 8px 32px rgba(0,0,0,.4);
-    }
-    .sample-video-wrap iframe {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      border: none;
-    }
-    @media (max-width: 768px) {
-      .sample-inner { grid-template-columns: 1fr; gap: 28px; }
-      .sample-desc { max-width: 100%; }
-      .sample-title { font-size: clamp(2.8rem, 8vw, 4.2rem); }
-    }
-
     /* ── FOR FAMILIES / DIRECTORS — 2 col ── */
     .audience-grid {
       display: grid; grid-template-columns: 1fr 1fr;
@@ -661,71 +607,28 @@
     /* ── MOBILE ── */
     @media (max-width: 768px) {
       html, body { overflow-x: hidden; }
-      body { padding-bottom: 80px; font-size: 1.5rem; }
-
-      /* Nav */
-      nav { height: 52px; }
-      .nav-logo-text { font-size: 1.45rem; }
-      .nav-cta { padding: 7px 14px; font-size: 1.25rem; }
-
-      /* Hero */
-      .hero { padding: 88px 0 56px; }
-      .hero h1 { font-size: clamp(3.2rem, 9vw, 5rem); }
-      .hero-sub { font-size: 1.5rem; }
-      .hero-actions { flex-direction: column; align-items: stretch; width: 100%; }
-      .hero-actions .btn-primary,
-      .hero-actions .btn-secondary { width: 100%; justify-content: center; }
-      .hero-actions .btn-call { display: none; }
-
-      /* Trust bar */
+      body { padding-bottom: 72px; }
+      .hero { padding: 100px 0 64px; }
       .trust-inner { grid-template-columns: 1fr 1fr; }
-      .trust-item { padding: 22px 16px; }
       .trust-item:nth-child(2) { border-right: none; }
       .trust-item:nth-child(3) { border-top: 1px solid var(--border); }
       .trust-item:nth-child(4) { border-top: 1px solid var(--border); border-right: none; }
-      .trust-num { font-size: 2.6rem; }
-
-      /* Sections */
-      .section { padding: 56px 0; }
-      .section-title { font-size: clamp(2.4rem, 7vw, 3.4rem); }
-
-      /* Audience */
       .audience-grid { grid-template-columns: 1fr; }
-      .audience-card { padding: 28px 24px 32px; }
-
-      /* Services */
       .services-grid { grid-template-columns: 1fr 1fr; }
-
-      /* Repertoire */
       .repertoire-grid { grid-template-columns: 1fr; }
-
-      /* Testimonials */
+      .steps-grid { grid-template-columns: 1fr; gap: 0; }
+      .step { border-right: 1px solid var(--border); border-bottom: none; border-radius: 0; }
+      .step:first-child { border-radius: 12px 12px 0 0; }
+      .step:last-child { border-bottom: 1px solid var(--border); border-radius: 0 0 12px 12px; }
       .testimonials-grid { grid-template-columns: 1fr; }
       .testimonial-card.featured { grid-column: auto; }
-      .testimonial-card { padding: 24px 22px 20px; }
-
-      /* Final CTA */
-      .final-cta { padding: 44px 24px; margin: 52px 0; border-radius: 12px; }
-      .final-cta-title { font-size: clamp(2.6rem, 7vw, 3.8rem); }
-      .final-cta-actions { flex-direction: column; align-items: stretch; }
-      .final-cta-actions .btn-gold,
-      .final-cta-actions .btn-ghost-white { width: 100%; justify-content: center; }
-
-      /* Sticky bar */
-      .sticky-bar { padding: 10px 12px; gap: 6px; }
-      .sticky-btn { font-size: 1.3rem; padding: 11px 10px; }
-
-      /* Footer */
+      .final-cta { padding: 44px 28px; margin: 60px 0; border-radius: 12px; }
+      .hero-actions { flex-direction: column; align-items: flex-start; }
+      .hero-actions .btn-call { display: none; }
       .footer-inner { flex-direction: column; text-align: center; }
-      footer { padding: 36px 0 96px; }
     }
-
     @media (max-width: 520px) {
       .services-grid { grid-template-columns: 1fr; }
-      .hero h1 { font-size: clamp(3rem, 10vw, 4.2rem); }
-      .container { padding: 0 18px; }
-      .fd-cta { padding: 24px 20px; }
-      .final-cta { padding: 36px 20px; }
     }
   </style>
 </head>
@@ -797,35 +700,6 @@
         </div>
       </div>
     </div>
-
-    <!-- ── SAMPLE PERFORMANCE ── -->
-    <section class="sample-section">
-      <div class="container">
-        <div class="sample-inner">
-          <div class="sample-text">
-            <p class="sample-eyebrow">Hear a live performance</p>
-            <h2 class="sample-title">Amazing Grace</h2>
-            <p class="sample-desc">A live piano recording — so you can hear exactly what to expect on the day of the service.</p>
-            <div class="sample-tags">
-              <span>Live Piano</span>
-              <span>Funeral &amp; Memorial</span>
-              <span>Hudson Valley, NY</span>
-            </div>
-          </div>
-          <div class="sample-video">
-            <div class="sample-video-wrap">
-              <iframe
-                src="https://www.youtube.com/embed/PWkGY1lNN-M?rel=0&modestbranding=1"
-                title="Amazing Grace — Live Piano Performance by Moysic"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-                loading="lazy">
-              </iframe>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- ── FOR FAMILIES & DIRECTORS ── -->
     <section class="section" id="who-we-serve">
